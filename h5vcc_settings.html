@@ -14,6 +14,13 @@
         .catch((error) => {
           console.error('Failed:', error);
         });
+      h5vcc.settings.set('some_key', 100)
+        .then((result) => {
+          console.log('Success:', result);
+        })
+        .catch((error) => {
+          console.error('Failed:', error);
+        });
     </script>
 </body>
 </html>
