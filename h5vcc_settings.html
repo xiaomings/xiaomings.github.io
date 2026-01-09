@@ -14,13 +14,53 @@
         .catch((error) => {
           console.error('Failed:', error);
         });
-      h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', 'somevalue')
-        .then((result) => {
-          console.log('Success:', result);
-        })
-        .catch((error) => {
-          console.error('Failed:', error);
-        });
+
+      // 1. Create the video element dynamically
+      const video = document.createElement('video');
+    
+      // 2. Configure video properties
+      video.controls = true;
+      video.width = 600;
+      video.height = 400;
+      video.style.background = "#000"; // Make it visible even if empty
+      video.style.border = "2px solid #333";
+      
+      // 3. Append the video to the DOM (the document body) so it's visible
+      document.body.appendChild(video);
+      
+      // 4. Create MediaSource and attach it
+      const mediaSource = new MediaSource();
+      video.src = URL.createObjectURL(mediaSource);
+      
+      // 5. Wait for the source to open
+      mediaSource.addEventListener('sourceopen', () => {
+          console.log('MediaSource opened.');
+      
+          const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+      
+          if (MediaSource.isTypeSupported(mimeCodec)) {
+              try {
+                  const sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+                  
+                  // 6. Create the 1-byte buffer manually
+                  const oneByteData = new Uint8Array([0x00]); 
+                  console.log('Appending 1 byte...');
+      
+                  // Listen for the end of the append operation
+                  sourceBuffer.addEventListener('updateend', () => {
+                      console.log('Append complete (updateend fired).');
+                  });
+      
+                  // 7. Append the data
+                  sourceBuffer.appendBuffer(oneByteData);
+      
+              } catch (e) {
+                  console.error('Error adding SourceBuffer:', e);
+              }
+          } else {
+              console.error('MIME type not supported:', mimeCodec);
+          }
+      });
     </script>
 </body>
 </html>
