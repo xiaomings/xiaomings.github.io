@@ -7,7 +7,13 @@
 <body>
     <h1>H5vcc Settings</h1>
     <script>
-        console.log("Hello World");
+      h5vcc.setting.set('some_key', 'some_value')
+        .then((result) => {
+          console.log('Success:', result);
+        })
+        .catch((error) => {
+          console.error('Failed:', error);
+        });
     </script>
 </body>
 </html>
