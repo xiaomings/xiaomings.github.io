@@ -7,14 +7,14 @@
 <body>
     <h1>H5vcc Settings</h1>
     <script>
-      h5vcc.settings.set('some_key', 'some_value')
+      h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', 1)
         .then((result) => {
           console.log('Success:', result);
         })
         .catch((error) => {
           console.error('Failed:', error);
         });
-      h5vcc.settings.set('some_key', 100)
+      h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', 'somevalue')
         .then((result) => {
           console.log('Success:', result);
         })
