@@ -24,7 +24,9 @@
         }
       }
 
-      h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', 1)
+      is_enabled();
+
+      h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', is_enabled())
         .then((result) => {
           console.log('Success:', result);
         })
