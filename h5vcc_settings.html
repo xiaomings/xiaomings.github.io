@@ -17,13 +17,14 @@
   
         // 3. Check if the parameter exists before calling the function
         if (enableValue !== null) {
-            return Number(enableValue); 
+          return Number(enableValue); 
         } else {
-            console.log("No 'enable' parameter found in URL.");
+          console.log("No 'enable' parameter found in URL.");
+          return 0;
         }
       }
 
-      h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', 0)
+      h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', is_enabled())
         .then((result) => {
           console.log('Success:', result);
         })
