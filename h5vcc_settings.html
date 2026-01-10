@@ -17,7 +17,7 @@
   
         // 3. Check if the parameter exists before calling the function
         if (enableValue !== null) {
-          return Number(enableValue); 
+          return parseInt(enableValue); 
         } else {
           console.log("No 'enable' parameter found in URL.");
           return 0;
