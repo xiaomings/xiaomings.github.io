@@ -7,6 +7,22 @@
 <body>
     <h1>H5vcc Settings</h1>
     <script>
+      function is_enabled() {
+        // 1. Get the current URL parameters
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+  
+        // 2. Extract the 'enable' parameter
+        const enableValue = urlParams.get('enable');
+  
+        // 3. Check if the parameter exists before calling the function
+        if (enableValue !== null) {
+            return Number(enableValue); 
+        } else {
+            console.log("No 'enable' parameter found in URL.");
+        }
+      }
+
       h5vcc.settings.set('Media.AppendFirstSegmentSynchronously', 0)
         .then((result) => {
           console.log('Success:', result);
